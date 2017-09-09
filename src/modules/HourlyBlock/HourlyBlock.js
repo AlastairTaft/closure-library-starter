@@ -25,6 +25,7 @@ const styles = {
     top: -1.5,
     left: 0,
     width: '100%',
+    boxSizing: 'border-box',
   },
   rule: {
     position: 'relative',
