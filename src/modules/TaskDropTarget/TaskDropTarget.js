@@ -7,11 +7,21 @@ import classNames from 'classnames'
 
 const styles = {
   dropTarget: {
-    border: '1px solid purple',
-    height: blockConfig.height / 2,
+    height: (blockConfig.height / 2) - 8,
+    position: 'relative',
     width: '100%',
-    textAlign: 'center',
     boxSizing: 'border-box',
+    marginTop: 8,
+    marginBottom: 0,
+    backgroundColor: '#e4de3e',
+    color: 'white',
+    borderRadius: 3,
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: 2,
+    paddingRight: 2,
+    opacity: 0,
+    top: -3,
   },
 }
 
@@ -64,13 +74,17 @@ class InnerDropTarget extends Component {
     } = this.props
 
     const isActive = canDrop && isOver
-    const style = { top, height }
+    const style = { 
+      top: top -3, // See the task for these measurements, TODO Make this a Task element 
+      height: height - 8, 
+      opacity: isActive ? 0.5 : undefined,
+    }
 
    return <div style={style} className={classNames(classes.dropTarget, className)}>
-      {isActive ?
+      {/*isActive ?
         'Release to drop' :
         'Drag item here'
-      }
+      */}
     </div>
   }
 }

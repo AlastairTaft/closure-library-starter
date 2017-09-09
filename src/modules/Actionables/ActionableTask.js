@@ -33,7 +33,7 @@ class ActionableTask extends Component {
   };
 
   render() {
-    const { isDragging, connectDragSource, showCopyIcon } = this.props;
+    const { isDragging, connectDragSource, showCopyIcon, text } = this.props
     const opacity = isDragging ? 0.4 : 1;
     const dropEffect = showCopyIcon ? 'copy' : 'move';
 
@@ -42,7 +42,7 @@ class ActionableTask extends Component {
         When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
       </Task>*/
       <div>
-        <Task text="Go to the gym" editable={false} />
+        <Task text={text} editable={false} />
       </div>,
       { dropEffect },
     );
