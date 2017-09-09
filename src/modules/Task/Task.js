@@ -43,7 +43,7 @@ class Task extends Component {
   render = () => {
     
     const { text, style, editable, onValueChange } = this.props
-    
+    console.log(text)
     return <StyledContainer style={style}>
       <TextCapture 
         value={text} 
