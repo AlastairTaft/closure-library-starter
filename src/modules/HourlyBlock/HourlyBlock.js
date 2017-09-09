@@ -7,6 +7,7 @@ const styles = {
   block: {
     border: '1px solid blue',
     height: blockConfig.height,
+    boxSizing: 'border-box',
   },
   margin: {
     width: 40,
@@ -25,9 +26,9 @@ class HourlyBlock extends Component {
       <div className={classes.margin}>
         {startHour}
       </div>
-      <div className={classes.content}>
+      {/*<div className={classes.content}>
         <TextCapture />
-      </div>
+      </div>*/}
     </div>
   }
 }

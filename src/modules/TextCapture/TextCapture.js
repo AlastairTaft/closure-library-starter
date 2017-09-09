@@ -7,13 +7,19 @@ class TextCapture extends Component {
   };
 
   state = {
-    value: '',
+    value: this.props.value || '',
+  };
+
+  componentWillReceiveProps = (newProps) => {
+    if (typeof newProps.value !== 'undefined')
+      this.setState({ value: newProps.value })
   };
 
   onKeyDown = (e) => {
     const { onValueChange } = this.props
     const { value } = this.state
-    if (e.keyCode == 13){
+    
+    if (e.keyCode == 13 && e.shiftKey !== true){
       e.preventDefault()
       this.textarea.blur()
       //return onValueChange(value)
@@ -26,6 +32,10 @@ class TextCapture extends Component {
     const { onValueChange } = this.props
     const { value } = this.state
     onValueChange(value)
+  };
+
+  focus = () => {
+    this.textarea.focus()
   };
 
   render = () => {

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import blockConfig from './../HourlyBlock/blockConfig'
 import injectStyles from 'react-jss'
 import HourlyBlock from './../HourlyBlock'
-import TimelineOverlay from './../TimelineOverlay'
+import TasksLayer from './../TasksLayer'
+import InteractiveLayer from './../InteractiveLayer'
 
 const styles = {
   container: {
@@ -24,9 +25,9 @@ class DailyTimeline extends Component {
   render = () => {
     const { classes } = this.props
     return <div className={classes.container}>
-      Daily Time Line
       {timeBlocks.map(block => <HourlyBlock startHour={block} />)}
-      <TimelineOverlay />
+      <TasksLayer />
+      <InteractiveLayer />
     </div>
   }
 }

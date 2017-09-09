@@ -8,6 +8,7 @@ import blockConfig from './../HourlyBlock/blockConfig'
 
 const styles = {
   overlay: {
+    pointerEvents: 'none',
     position: 'absolute',
     top: 0,
     left: 0,
