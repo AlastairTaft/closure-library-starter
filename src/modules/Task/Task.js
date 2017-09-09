@@ -20,7 +20,7 @@ const styles = {
     boxSizing: 'border-box',
     marginTop: 8,
     marginBottom: 0,
-    backgroundColor: '#e4de3e',
+    backgroundColor: '#a6a6a6',
     color: 'white',
     borderRadius: 3,
     display: 'flex',
@@ -38,12 +38,13 @@ class TaskContainer extends Component {
 
   render = () => {
     
-    var { classes, style, height, top, className } = this.props
+    var { classes, style, height, top, className, keyColour } = this.props
     
     // Allow pixels for a margin
     style = { 
       height: height -8,
       top: top - 3,
+      backgroundColor: keyColour,
     }
 
     return <div className={classNames(classes.task, className)} style={style}>
@@ -70,6 +71,7 @@ class Task extends Component {
       editable, 
       onValueChange,
       className,
+      keyColour,
     } = this.props
     
     return <StyledContainer 
@@ -77,6 +79,7 @@ class Task extends Component {
       height={height} 
       top={top}
       className={className}
+      keyColour={keyColour}
     >
       <TextCapture 
         value={text} 

@@ -13,6 +13,11 @@ const styles = {
     top: 0,
     right: 0,
   },
+  close: {
+    position: 'absolute',
+    top: 18,
+    right: 18,
+  },
 }
 
 class SideMenu extends Component {
@@ -33,12 +38,22 @@ class SideMenu extends Component {
 
   render = () => {
 
-    var { open, classes } = this.props
+    var { open, classes, onClose } = this.props
     // For testing
-    open = true
 
     return <Motion defaultStyle={{x: open ? 0 : -(menuWidth)}} style={{x: spring( open ? 0 : -(menuWidth))}}>
-		  {value => <div className={classes.container}>
+		  {value => <div className={classes.container} style={{right: value.x}}>
+        <svg 
+          onClick={onClose}
+          className={classes.close}
+          fill="#969696" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          width="24"
+        >
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
 			  <Actionables />
 			</div>}
 		</Motion>

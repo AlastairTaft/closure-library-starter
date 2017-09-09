@@ -23,17 +23,23 @@ const styles = {
 }
 
 class Actionables extends Component {
+
+  static defaultProps = {
+    actionables: [],
+  };
+
   render = () => {
-    const { classes } = this.props
+    const { classes, actionables } = this.props
     return <div>
       <div className={classes.header}>
         <h2>Actionables</h2>
       </div>
       <div className={classes.content}>
         <div style={{position: 'relative'}}>
-          <Task text="Go to the gym" />
-          <Task text="Go to the gym 2" />
-          <Task text="Go to the gym 3" />
+          {actionables.map(a => <Task 
+            text={a.text} 
+            keyColour={a.milestoneKey} 
+          />)}
         </div>
       </div>
     </div>

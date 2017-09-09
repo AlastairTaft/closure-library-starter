@@ -17,13 +17,14 @@ const sampleState = {
 export default function(state = sampleState, action){
 
   if (action.type === 'ADD_TASK'){
-    const { id, startDate, endDate, text } = action
+    const { id, startDate, endDate, text, keyColour } = action
     state = Object.assign({}, state)
     state[id] = {
       startDate,
       endDate,
       text,
       id,
+      keyColour,
     }
   }
 

@@ -7,7 +7,10 @@ import { Provider } from 'react-redux'
 import store from './../../store'
 import SideMenu from './../SideMenu'
 import { DragDropContext } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+//import HTML5Backend from 'react-dnd-html5-backend'
+import MultiBackend from 'react-dnd-multi-backend'
+import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch'
+import Header from './../Header'
 
 const styles = {
   app: {
@@ -26,14 +29,24 @@ const styles = {
 
 
 class App extends Component {
+
+  state = {
+    actionablesOpen: false,
+  };
+
   render() {
     const { classes } = this.props
+    const { actionablesOpen } = this.state
     return <div className={classes.app}>
-      <Infographic />
+      <Header onHamburgerClick={() => this.setState({actionablesOpen: !actionablesOpen})} />
+      {/*<Infographic />*/}
       <br /><br />
       <DailyTimeline />
       <br /><br />
-      <SideMenu />
+      <SideMenu 
+        open={actionablesOpen} 
+        onClose={() => this.setState({actionablesOpen: false})}
+      />
     </div>
   }
 }
@@ -43,7 +56,7 @@ const AppWithProvider = props => <Provider store={store}>
   <StyledApp />
 </Provider>
 
-const AppWithDragDrop = DragDropContext(HTML5Backend)(AppWithProvider)
+const AppWithDragDrop = DragDropContext(MultiBackend(HTML5toTouch))(AppWithProvider)
 
 
 export default AppWithDragDrop

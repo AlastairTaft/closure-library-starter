@@ -49,7 +49,10 @@ class TaskDropTarget extends Component {
 
   onDrop = (item) => {
     const { onDrop } = this.props
-    onDrop(item.text)
+    onDrop({
+      text: item.text,
+      keyColour: item.keyColour,
+    })
   };
 
   render() {
@@ -72,7 +75,7 @@ class InnerDropTarget extends Component {
       top,
       height, 
     } = this.props
-
+    
     const isActive = canDrop && isOver
     const style = { 
       top: top -3, // See the task for these measurements, TODO Make this a Task element 

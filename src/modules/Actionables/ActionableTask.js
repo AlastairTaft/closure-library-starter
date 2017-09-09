@@ -15,7 +15,8 @@ const style = {
 const boxSource = {
   beginDrag(props) {
     return {
-      text: props.text,
+      text: props.text, 
+      keyColour: props.keyColour,
     };
   },
 };
@@ -33,7 +34,7 @@ class ActionableTask extends Component {
   };
 
   render() {
-    const { isDragging, connectDragSource, showCopyIcon, text } = this.props
+    const { isDragging, connectDragSource, showCopyIcon, text, keyColour } = this.props
     const opacity = isDragging ? 0.4 : 1;
     const dropEffect = showCopyIcon ? 'copy' : 'move';
 
@@ -42,7 +43,7 @@ class ActionableTask extends Component {
         When I am over a drop zone, I have {showCopyIcon ? 'copy' : 'no'} icon.
       </Task>*/
       <div>
-        <Task text={text} editable={false} />
+        <Task text={text} keyColour={keyColour} editable={false} />
       </div>,
       { dropEffect },
     );

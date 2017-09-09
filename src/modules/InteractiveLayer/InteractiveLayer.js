@@ -71,7 +71,7 @@ class InteractiveLayer extends Component {
     })
   };
 
-  addTask = (text, startTimeMinutes, blockLengthMinutes) => {
+  addTask = (text, startTimeMinutes, blockLengthMinutes, keyColour) => {
     const { addTask } = this.props
     var startDate = new Date()
     startDate.setHours(0)
@@ -86,6 +86,9 @@ class InteractiveLayer extends Component {
       text,
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
+      // TODO This needs to be linked to a actionable properly and the colour
+      // infered
+      keyColour: keyColour,
     })
   };
 
@@ -125,8 +128,8 @@ class InteractiveLayer extends Component {
           top={y} 
           height={height} 
           className={classes.task} 
-          onDrop={(text) => {
-            this.addTask(text, da.startTime, (da.endTime - da.startTime))
+          onDrop={({text, keyColour}) => {
+            this.addTask(text, da.startTime, (da.endTime - da.startTime), keyColour)
           }}
         />
         /*return <div 

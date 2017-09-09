@@ -45,6 +45,7 @@ class TimelineOverlay extends Component {
           height={height} 
           top={top} 
           className={classes.task}
+          keyColour={t.keyColour}
         />
       })}
     </div>
