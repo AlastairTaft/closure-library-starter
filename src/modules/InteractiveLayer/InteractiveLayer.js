@@ -3,6 +3,7 @@ import injectStyles from 'react-jss'
 import Task from './../Task'
 import blockConfig from './../HourlyBlock/blockConfig'
 import PropTypes from 'prop-types'
+import TaskDropTarget from './../TaskDropTarget'
 
 const styles = {
   container: {
@@ -21,13 +22,19 @@ class InteractiveLayer extends Component {
 
   static defaultProps = {
     deadAreas: [],
+    dropAreas: [],
   };
 
   static propTypes = {
     deadAreas: PropTypes.arrayOf(PropTypes.shape({
       startTime: PropTypes.number, 
       endTime: PropTypes.number,
-    }))
+    })),
+    dropAreas: PropTypes.arrayOf(PropTypes.shape({
+      // In minutes
+      startTime: PropTypes.number, 
+      endTime: PropTypes.number,
+    })),
   };
 
   state = {
@@ -87,7 +94,7 @@ class InteractiveLayer extends Component {
   };
 
   render = () => {
-    const { classes } = this.props
+    const { classes, dropAreas } = this.props
     const { adding, startTimeMinutes, blockLengthMinutes, text } = this.state
 
     const y = calculateYFromMinutes(startTimeMinutes)
@@ -111,6 +118,11 @@ class InteractiveLayer extends Component {
         text={text}
         className={classes.task}
       /> : null}
+      {dropAreas.map(da => {
+        const y = calculateYFromMinutes(da.startTime)
+        const height = blockConfig.height * ((da.endTime - da.startTime) / 60)
+        return <TaskDropTarget top={y} height={height} />
+      })}
     </div>
   };
 }

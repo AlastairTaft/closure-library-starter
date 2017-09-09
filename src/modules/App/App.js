@@ -6,6 +6,8 @@ import DailyTimeline from './../DailyTimeline'
 import { Provider } from 'react-redux'
 import store from './../../store'
 import SideMenu from './../SideMenu'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 const styles = {
   app: {
@@ -41,4 +43,7 @@ const AppWithProvider = props => <Provider store={store}>
   <StyledApp />
 </Provider>
 
-export default AppWithProvider
+const AppWithDragDrop = DragDropContext(HTML5Backend)(AppWithProvider)
+
+
+export default AppWithDragDrop

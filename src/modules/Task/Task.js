@@ -82,6 +82,7 @@ class Task extends Component {
         value={text} 
         onValueChange={onValueChange}
         ref={el => this.textCapture = el} 
+        editable={editable}
       />
     </StyledContainer> 
   }

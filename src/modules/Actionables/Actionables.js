@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import injectStyles from 'react-jss'
-import Task from './../Task'
+import Task from './ActionableTask'
+import { DragSource } from 'react-dnd'
 
 const styles = {
   header: {
@@ -31,6 +32,8 @@ class Actionables extends Component {
       <div className={classes.content}>
         <div style={{position: 'relative'}}>
           <Task text="Go to the gym" />
+          <Task text="Go to the gym 2" />
+          <Task text="Go to the gym 3" />
         </div>
       </div>
     </div>

@@ -11,7 +11,10 @@ const mapStateToProps = (state) => {
     deadAreas: Object.keys(state.tasks).map(k => state.tasks[k]).map(t => ({
       startTime: (new Date(t.startDate)).getHours() * 60 + (new Date(t.startDate)).getMinutes(),
       endTime: (new Date(t.endDate)).getHours() * 60 + (new Date(t.endDate)).getMinutes(),
-    }))
+    })),
+    dropAreas: [
+      { startTime: 0, endTime: 30 },
+    ],
   }
 }
 

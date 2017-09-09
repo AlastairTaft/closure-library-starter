@@ -53,6 +53,7 @@ class TextCapture extends Component {
   };
 
   render = () => {
+    const { editable } = this.props
     const { value } = this.state
     
     return <StyledTextArea 
@@ -60,6 +61,7 @@ class TextCapture extends Component {
       onKeyDown={this.onKeyDown} 
       onInput={this.onInput}
       onBlur={this.onBlur}
+      editable={editable}
     >
       {value}
     </StyledTextArea>
@@ -90,8 +92,12 @@ class TextArea extends Component {
   }
 
   render = () => {
-    const {classes, ...otherProps} = this.props
-    return <p {...otherProps} className={classes.textArea} contentEditable={true}>
+    const {classes, editable, ...otherProps} = this.props
+    return <p 
+      {...otherProps} 
+      className={classes.textArea} 
+      contentEditable={editable === false ? false : true}
+    >
       {this.initialChildren}
     </p>
   }
