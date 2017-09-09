@@ -30,13 +30,29 @@ const collect = (connect, monitor) => ({
 
 
 class TaskDropTarget extends Component {
+
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
     canDrop: PropTypes.bool.isRequired,
   };
 
+  onDrop = (item) => {
+    const { onDrop } = this.props
+    onDrop(item.text)
+  };
+
   render() {
+    const { connectDropTarget, ...otherProps } = this.props
+    return connectDropTarget(<div>
+      <StyledInnerDropTarget {...otherProps} />
+    </div>);
+  }
+}
+
+class InnerDropTarget extends Component {
+  render = () => {
+
     const { 
       canDrop, 
       isOver, 
@@ -50,16 +66,14 @@ class TaskDropTarget extends Component {
     const isActive = canDrop && isOver
     const style = { top, height }
 
-    return connectDropTarget(
-      <div style={style} className={classNames(classes.dropTarget, className)}>
-        {isActive ?
-          'Release to drop' :
-          'Drag item here'
-        }
-      </div>,
-    );
+   return <div style={style} className={classNames(classes.dropTarget, className)}>
+      {isActive ?
+        'Release to drop' :
+        'Drag item here'
+      }
+    </div>
   }
 }
+const StyledInnerDropTarget = injectStyles(styles)(InnerDropTarget)
 
-const StyledDropTarget = injectStyles(styles)(TaskDropTarget)
-export default DropTarget('Task', boxTarget, collect)(StyledDropTarget)
+export default DropTarget('Task', boxTarget, collect)(TaskDropTarget)

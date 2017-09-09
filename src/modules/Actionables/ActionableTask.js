@@ -13,8 +13,10 @@ const style = {
 };
 
 const boxSource = {
-  beginDrag() {
-    return {};
+  beginDrag(props) {
+    return {
+      text: props.text,
+    };
   },
 };
 

@@ -71,9 +71,8 @@ class InteractiveLayer extends Component {
     })
   };
 
-  addTask = (text) => {
+  addTask = (text, startTimeMinutes, blockLengthMinutes) => {
     const { addTask } = this.props
-    const { startTimeMinutes, blockLengthMinutes } = this.state
     var startDate = new Date()
     startDate.setHours(0)
     startDate.setMinutes(0)
@@ -87,9 +86,6 @@ class InteractiveLayer extends Component {
       text,
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
-    })
-    this.setState({
-      adding: false,
     })
   };
 
@@ -114,14 +110,25 @@ class InteractiveLayer extends Component {
           if (!el) return
           el.focus()
         }}
-        onValueChange={this.addTask}
+        onValueChange={(text) => {
+          const { startTimeMinutes, blockLengthMinutes } = this.state
+          this.addTask(text, startTimeMinutes, blockLengthMinutes)
+          this.setState({ adding: false, })
+        }}
         text={text}
         className={classes.task}
       /> : null}
       {dropAreas.map((da, i) => {
         const y = calculateYFromMinutes(da.startTime)
         const height = blockConfig.height * ((da.endTime - da.startTime) / 60)
-        return <TaskDropTarget top={y} height={height} className={classes.task} />
+        return <TaskDropTarget 
+          top={y} 
+          height={height} 
+          className={classes.task} 
+          onDrop={(text) => {
+            this.addTask(text, da.startTime, (da.endTime - da.startTime))
+          }}
+        />
         /*return <div 
           style={{
             position: 'absolute',
