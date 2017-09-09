@@ -36,8 +36,7 @@ class TimelineOverlay extends Component {
 
         var top = startMinutes * blockConfig.height / 60
         var height = (endMinutes - startMinutes)  * blockConfig.height / 60
-        console.log('update', t)
-        return <Task key={t.id} text={t.text} style={{top, height}} />
+        return <Task key={t.id} text={t.text} height={height} top={top} />
       })}
     </div>
   }

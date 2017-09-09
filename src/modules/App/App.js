@@ -5,6 +5,7 @@ import Infographic from './../Infographic'
 import DailyTimeline from './../DailyTimeline'
 import { Provider } from 'react-redux'
 import store from './../../store'
+import SideMenu from './../SideMenu'
 
 const styles = {
   app: {
@@ -15,7 +16,7 @@ const styles = {
       margin: 0,
       padding: 0,
       fontFamily: "'Montserrat', sans-serif",
-      backgroundColor: '#cccccc',
+      backgroundColor: '#f3f3f3',
       color: '#525252',
     },
   },
@@ -28,6 +29,7 @@ class App extends Component {
     return <div className={classes.app}>
       <Infographic />
       <DailyTimeline />
+      <SideMenu />
     </div>
   }
 }

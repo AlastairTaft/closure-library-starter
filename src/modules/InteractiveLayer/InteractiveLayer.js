@@ -96,8 +96,9 @@ class InteractiveLayer extends Component {
       ref={el => this.container = el}
     >
       {adding ? <Task 
-        editable={true} 
-        style={{top: y, height }} 
+        editable={true}
+        height={height} 
+        top={y} 
         ref={el => {
           // If there's no el then we are dismounting
           if (!el) return

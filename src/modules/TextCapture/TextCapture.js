@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import injectStyles from 'react-jss'
 
 class TextCapture extends Component {
 
@@ -27,7 +29,7 @@ class TextCapture extends Component {
   };
 
   onInput = (e) => {
-    this.setState({ value: e.target.value })
+    this.setState({ value: e.target.innerText })
   }
 
   onBlur = (e) => {
@@ -43,15 +45,49 @@ class TextCapture extends Component {
   render = () => {
     const { value } = this.state
     
-    return <textarea 
-      ref={el => this.textarea = el}
+    return <StyledTextArea 
+      ref={el => this.textarea = ReactDOM.findDOMNode(el)}
       onKeyDown={this.onKeyDown} 
       onInput={this.onInput}
       onBlur={this.onBlur}
     >
       {value}
-    </textarea>
+    </StyledTextArea>
   }
 }
+
+
+const styles = {
+  textArea: {
+    border: 'none',
+    overflow: 'auto',
+    outline: 'none',
+    boxShadow: 'none',
+    backgroundColor: 'transparent',
+    resize: 'none',
+    color: 'inherit',
+    margin: 0,
+    whiteSpace: 'pre',
+    minWidth: 5, // Required so the cursor shows when there's no content
+  },
+}
+
+class TextArea extends Component {
+
+  constructor(props){
+    super(props)
+    this.initialChildren = props.children
+  }
+
+  render = () => {
+    const {classes, ...otherProps} = this.props
+    return <p {...otherProps} className={classes.textArea} contentEditable={true}>
+      {this.initialChildren}
+    </p>
+  }
+}
+
+const StyledTextArea = injectStyles(styles)(TextArea)
+  
 
 export default TextCapture

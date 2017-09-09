@@ -1,4 +1,4 @@
 
 export default {
-  height: 60,
+  height: 100,
 }

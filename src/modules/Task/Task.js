@@ -15,8 +15,18 @@ const styles = {
     position: 'absolute',
     width: '100%',
     minHeight: 10,
-    border: '1px solid green',
     boxSizing: 'border-box',
+    marginTop: 8,
+    marginBottom: 0,
+    backgroundColor: '#e4de3e',
+    color: 'white',
+    marginLeft: 2,
+    marginRight: 2,
+    borderRadius: 3,
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: 2,
+    paddingRight: 2,
   },
 }
 
@@ -24,8 +34,14 @@ class TaskContainer extends Component {
   
   render = () => {
     
-    const { classes, style } = this.props
+    var { classes, style, height, top } = this.props
     
+    // Allow pixels for a margin
+    style = { 
+      height: height -8,
+      top: top - 3,
+    }
+
     return <div className={classes.task} style={style}>
       {this.props.children}
     </div> 
@@ -42,9 +58,9 @@ class Task extends Component {
 
   render = () => {
     
-    const { text, style, editable, onValueChange } = this.props
-    console.log(text)
-    return <StyledContainer style={style}>
+    const { text, style, height, top, editable, onValueChange } = this.props
+    
+    return <StyledContainer style={style} height={height} top={top}>
       <TextCapture 
         value={text} 
         onValueChange={onValueChange}
