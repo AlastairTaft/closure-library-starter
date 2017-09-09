@@ -9,7 +9,6 @@ const styles = {
   container: {
     position: 'relative',
     height: blockConfig.height * 24,
-    border: '1px solid red',
   },
 }
 

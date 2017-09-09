@@ -28,7 +28,9 @@ class App extends Component {
     const { classes } = this.props
     return <div className={classes.app}>
       <Infographic />
+      <br /><br />
       <DailyTimeline />
+      <br /><br />
       <SideMenu />
     </div>
   }

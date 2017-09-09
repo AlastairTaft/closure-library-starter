@@ -8,7 +8,7 @@ const styles = {
 class Infographic extends Component {
   render = () => {
     return <div>
-      Infographic
+      
     </div>
   }
 }

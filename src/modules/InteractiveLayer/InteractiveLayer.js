@@ -8,9 +8,12 @@ const styles = {
   container: {
     position: 'absolute',
     top: 0,
-    right: 0,
-    left: 80,
+    right: 2,
+    left: 80 + 2,
     bottom: 0,
+  },
+  task: {
+    position: 'absolute',
   },
 }
 
@@ -106,6 +109,7 @@ class InteractiveLayer extends Component {
         }}
         onValueChange={this.addTask}
         text={text}
+        className={classes.task}
       /> : null}
     </div>
   };

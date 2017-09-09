@@ -9,10 +9,12 @@
 import React, { Component } from 'react'
 import injectStyles from 'react-jss'
 import TextCapture from './../TextCapture'
+import classNames from 'classnames'
+import blockConfig from './../HourlyBlock/blockConfig'
 
 const styles = {
   task: {
-    position: 'absolute',
+    position: 'relative',
     width: '100%',
     minHeight: 10,
     boxSizing: 'border-box',
@@ -20,8 +22,6 @@ const styles = {
     marginBottom: 0,
     backgroundColor: '#e4de3e',
     color: 'white',
-    marginLeft: 2,
-    marginRight: 2,
     borderRadius: 3,
     display: 'flex',
     alignItems: 'center',
@@ -32,9 +32,13 @@ const styles = {
 
 class TaskContainer extends Component {
   
+  static defaultProps = {
+    height: blockConfig.height / 2,
+  };
+
   render = () => {
     
-    var { classes, style, height, top } = this.props
+    var { classes, style, height, top, className } = this.props
     
     // Allow pixels for a margin
     style = { 
@@ -42,7 +46,7 @@ class TaskContainer extends Component {
       top: top - 3,
     }
 
-    return <div className={classes.task} style={style}>
+    return <div className={classNames(classes.task, className)} style={style}>
       {this.props.children}
     </div> 
   }
@@ -58,9 +62,22 @@ class Task extends Component {
 
   render = () => {
     
-    const { text, style, height, top, editable, onValueChange } = this.props
+    const { 
+      text, 
+      style, 
+      height, 
+      top, 
+      editable, 
+      onValueChange,
+      className,
+    } = this.props
     
-    return <StyledContainer style={style} height={height} top={top}>
+    return <StyledContainer 
+      style={style} 
+      height={height} 
+      top={top}
+      className={className}
+    >
       <TextCapture 
         value={text} 
         onValueChange={onValueChange}

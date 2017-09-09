@@ -11,9 +11,12 @@ const styles = {
     pointerEvents: 'none',
     position: 'absolute',
     top: 0,
-    left: 80,
-    right: 0,
+    left: 80 + 2,
+    right: 2,
     bottom: 0,
+  },
+  task: {
+    position: 'absolute',
   },
 }
 
@@ -36,7 +39,13 @@ class TimelineOverlay extends Component {
 
         var top = startMinutes * blockConfig.height / 60
         var height = (endMinutes - startMinutes)  * blockConfig.height / 60
-        return <Task key={t.id} text={t.text} height={height} top={top} />
+        return <Task 
+          key={t.id} 
+          text={t.text} 
+          height={height} 
+          top={top} 
+          className={classes.task}
+        />
       })}
     </div>
   }

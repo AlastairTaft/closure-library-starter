@@ -25,11 +25,21 @@ class TextCapture extends Component {
       e.preventDefault()
       this.textarea.blur()
       //return onValueChange(value)
+    } else if (e.keyCode == 13){
+      // Don't allow a new line if there's already one, i.e. limit to 2 lines
+      if (value.indexOf('\n') !== -1){
+        e.preventDefault()
+        return
+      }
     }
   };
 
   onInput = (e) => {
-    this.setState({ value: e.target.innerText })
+    
+    var value = e.target.innerText
+    // Allow only one line break
+    //value = limitToFirstNewLine(value)
+    this.setState({ value })
   }
 
   onBlur = (e) => {
@@ -91,3 +101,21 @@ const StyledTextArea = injectStyles(styles)(TextArea)
   
 
 export default TextCapture
+
+
+// Deprecated found simpler solution using keyDown
+/**
+ * Replaces all but the first occurance of a new line in a string
+ * @param {String} str
+ * @returns {String}
+ */
+/*export function limitToFirstNewLine(str){
+  var first = true
+  return str.replace(/(\n)/g, function(match, group1){ //group in accordance with RE
+    if (first) {
+      first = false
+      return match
+    }
+    return ''
+  })
+}*/
