@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import injectStyles from 'react-jss'
 import TextCapture from './../TextCapture'
+import blockConfig from './blockConfig'
 
 const styles = {
   block: {
     border: '1px solid blue',
+    height: blockConfig.height,
   },
   margin: {
     width: 40,
@@ -14,7 +16,6 @@ const styles = {
     display: 'inline-block',
     position: 'relative',
   },
-
 }
 
 class HourlyBlock extends Component {

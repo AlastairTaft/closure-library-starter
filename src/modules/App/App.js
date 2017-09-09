@@ -3,6 +3,8 @@ import logo from './logo.svg'
 import injectStyles from 'react-jss'
 import Infographic from './../Infographic'
 import DailyTimeline from './../DailyTimeline'
+import { Provider } from 'react-redux'
+import store from './../../store'
 
 const styles = {
   app: {
@@ -27,5 +29,9 @@ class App extends Component {
   }
 }
 
-export default injectStyles(styles)(App)
+const StyledApp = injectStyles(styles)(App)
+const AppWithProvider = props => <Provider store={store}>
+  <StyledApp />
+</Provider>
 
+export default AppWithProvider
