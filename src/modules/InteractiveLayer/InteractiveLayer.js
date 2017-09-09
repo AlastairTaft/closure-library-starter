@@ -99,7 +99,7 @@ class InteractiveLayer extends Component {
 
     const y = calculateYFromMinutes(startTimeMinutes)
     const height = blockConfig.height * (blockLengthMinutes / 60)
-
+    
     return <div 
       className={classes.container} 
       onClick={this.onClick}
@@ -118,10 +118,21 @@ class InteractiveLayer extends Component {
         text={text}
         className={classes.task}
       /> : null}
-      {dropAreas.map(da => {
+      {dropAreas.map((da, i) => {
         const y = calculateYFromMinutes(da.startTime)
         const height = blockConfig.height * ((da.endTime - da.startTime) / 60)
-        return <TaskDropTarget top={y} height={height} />
+        return <TaskDropTarget top={y} height={height} className={classes.task} />
+        /*return <div 
+          style={{
+            position: 'absolute',
+            width: '100%',
+            border: '1px solid green',
+            height: 50,
+            top: y,
+            boxSizing: 'border-box',
+          }} 
+          key={da.startTime + 'abc'}
+        />*/
       })}
     </div>
   };

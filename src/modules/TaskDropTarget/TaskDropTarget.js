@@ -2,14 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { DropTarget } from 'react-dnd'
 import blockConfig from './../HourlyBlock/blockConfig'
+import injectStyles from 'react-jss'
+import classNames from 'classnames'
 
-const style = {
-  border: '1px solid purple',
-  height: blockConfig.height / 2,
-  width: '100%',
-  padding: '2rem',
-  textAlign: 'center',
-};
+const styles = {
+  dropTarget: {
+    border: '1px solid purple',
+    height: blockConfig.height / 2,
+    width: '100%',
+    textAlign: 'center',
+    boxSizing: 'border-box',
+  },
+}
 
 const boxTarget = {
   drop(props, monitor, component) {
@@ -33,11 +37,21 @@ class TaskDropTarget extends Component {
   };
 
   render() {
-    const { canDrop, isOver, connectDropTarget } = this.props;
-    const isActive = canDrop && isOver;
+    const { 
+      canDrop, 
+      isOver, 
+      connectDropTarget, 
+      className, 
+      classes,
+      top,
+      height, 
+    } = this.props
+
+    const isActive = canDrop && isOver
+    const style = { top, height }
 
     return connectDropTarget(
-      <div style={style}>
+      <div style={style} className={classNames(classes.dropTarget, className)}>
         {isActive ?
           'Release to drop' :
           'Drag item here'
@@ -47,4 +61,5 @@ class TaskDropTarget extends Component {
   }
 }
 
-export default DropTarget('Task', boxTarget, collect)(TaskDropTarget)
+const StyledDropTarget = injectStyles(styles)(TaskDropTarget)
+export default DropTarget('Task', boxTarget, collect)(StyledDropTarget)

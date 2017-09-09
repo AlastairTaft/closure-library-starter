@@ -71,4 +71,15 @@ describe(`InteractiveLayer isStartTimeInDeadArea()`, () => {
 
     expect(isStartTimeInDeadArea(deadAreas)(startTime, length)).to.be.false
   })
+
+  it(`should return true`, () => {
+    const deadAreas = [
+      {startTime: 0, endTime: 30 }
+    ]
+
+    var startTime = 0,
+    length = 30
+
+    expect(isStartTimeInDeadArea(deadAreas)(startTime, length)).to.be.true
+  })
 })
