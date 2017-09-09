@@ -8,12 +8,15 @@ import store from './../../store'
 
 const styles = {
   app: {
-    '@global': {
-      body: {
-        margin: 0,
-        padding: 0,
-        fontFamily: 'sans-serif',
-      },
+    
+  },
+  '@global': {
+    body: {
+      margin: 0,
+      padding: 0,
+      fontFamily: "'Montserrat', sans-serif",
+      backgroundColor: '#cccccc',
+      color: '#525252',
     },
   },
 }

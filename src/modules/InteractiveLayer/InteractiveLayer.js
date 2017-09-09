@@ -9,7 +9,7 @@ const styles = {
     position: 'absolute',
     top: 0,
     right: 0,
-    left: 0,
+    left: 80,
     bottom: 0,
   },
 }
