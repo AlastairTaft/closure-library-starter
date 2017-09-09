@@ -13,7 +13,7 @@ const styles = {
     boxSizing: 'border-box',
     marginTop: 8,
     marginBottom: 0,
-    backgroundColor: '#e4de3e',
+    backgroundColor: '#a6a6a6',
     color: 'white',
     borderRadius: 3,
     display: 'flex',
