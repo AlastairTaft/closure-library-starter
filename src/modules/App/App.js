@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import injectStyles from 'react-jss'
 import Infographic from './../Infographic'
 import DailyTimeline from './../DailyTimeline'
