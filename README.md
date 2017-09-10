@@ -6,5 +6,7 @@ This repository contains [a prototype](https://goal-step.firebaseapp.com/) for t
 
 ### What can it do?
   - Click on any 30 minute time slot, start typing and hit enter or click away to add a new daily task
+  - Elegantly allows a max of two lines per task (SHIFT + ENTER to add a newline)
   - Toggle the "Actionables" menu by clicking on the hamburger icon
   - Drag and drop "Actionables" onto timeslots in your daily planner
+  
