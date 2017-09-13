@@ -1,7 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './modules/App'
-import registerServiceWorker from './registerServiceWorker'
+import App from './dom/App'
 
-ReactDOM.render(<App />, document.getElementById('root'))
-registerServiceWorker()
+var app = new App
+
+app.render(document.body)
