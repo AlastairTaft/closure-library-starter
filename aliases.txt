@@ -1,7 +1,8 @@
-const path = require('path');
-const ClosureCompilerPlugin = require('webpack-closure-compiler');
 
-var aliases = { 'goog.a11y.aria.Announcer': 'src/goog/a11y/aria/announcer.js',
+> uhack2017@0.1.0 generate:aliases /Users/alastairtaft/projects/GoalStep
+> node tools/generateGoogWebpackAliases/testRun.js src
+
+{ 'goog.a11y.aria.Announcer': 'src/goog/a11y/aria/announcer.js',
   'goog.a11y.aria.AnnouncerTest': 'src/goog/a11y/aria/announcer_test.js',
   'goog.a11y.aria': 'src/goog/a11y/aria/aria.js',
   'goog.a11y.ariaTest': 'src/goog/a11y/aria/aria_test.js',
@@ -5672,46 +5673,3 @@ var aliases = { 'goog.a11y.aria.Announcer': 'src/goog/a11y/aria/announcer.js',
   'goog.webgl': 'src/goog/webgl/webgl.js',
   'goog.window': 'src/goog/window/window.js',
   'goog.windowTest': 'src/goog/window/window_test.js' }
-
-// Make the paths relative to __dirname
-Object.keys(aliases).forEach(k => aliases[k] = path.resolve(__dirname, aliases[k]))
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build')
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: [
-              ["./../../tools/babel-plugin/test/googPlugin"],
-              ["transform-react-jsx", {
-                "pragma": "DomHelper.createElement" // default pragma is React.createElement
-              }]
-            ]
-          }
-        }
-      }
-    ]
-  },
-  /*plugins: [
-    new ClosureCompilerPlugin({
-      compiler: {
-        jar: 'tools/closure-compiler/v20170910.jar', //optional 
-        language_in: 'ECMASCRIPT6',
-        language_out: 'ECMASCRIPT5',
-        compilation_level: 'ADVANCED'
-      },
-      concurrency: 3,
-    })
-  ],*/
-  resolve: {
-    alias: aliases,
-  }
-};
