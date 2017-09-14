@@ -15,6 +15,30 @@ module.exports = function({ types: t }) {
         //  && path.node.arguments.length == 1){
           state.foundGoogRequireCall = true;  
           var includePath = path.node.arguments[0].value
+          // So that it isn't being added to an undefined var
+          var namespaces = includePath.split('.')
+          for (var i = 1; i < namespaces.length -1; i++){
+            var thisNamespaces =  namespaces.slice(0, i + 1)
+            //statements.push(`${nextNameSpace} = ${nextNameSpace} || {};`)
+            //log(thisNamespaces)
+            var namespacePart = generateMemberExpression(thisNamespaces)
+            path.insertBefore(
+              t.expressionStatement(
+                t.assignmentExpression(
+                  '=',
+                  //t.identifier('goog'),
+                  namespacePart,
+                  //t.stringLiteral('test')
+                  //t.objectExpression([])
+                  t.logicalExpression(
+                    '||', 
+                    namespacePart, 
+                    t.objectExpression([])
+                  )
+                )
+              ) 
+            );
+          }
 
           //log(includePath)
           //path.scope.generateUidIdentifier("uid");
@@ -37,7 +61,7 @@ module.exports = function({ types: t }) {
           for (var i = 1; i < namespaces.length; i++){
             var thisNamespaces =  namespaces.slice(0, i + 1)
             //statements.push(`${nextNameSpace} = ${nextNameSpace} || {};`)
-            log(thisNamespaces)
+            //log(thisNamespaces)
             var namespacePart = generateMemberExpression(thisNamespaces)
             path.insertBefore(
               t.expressionStatement(
@@ -57,32 +81,34 @@ module.exports = function({ types: t }) {
             );
           }
 
-          function generateMemberExpression(namespaces){
-
-            if (namespaces.length == 1)
-              return t.identifier(namespaces[0])
-
-            if (namespaces.length == 2)
-              return t.memberExpression(
-                t.identifier(namespaces[0]),
-                t.identifier(namespaces[1]),
-                false
-              )
-
-            
-            var last = namespaces[namespaces.length - 1]
-            var others = namespaces.slice(0, namespaces.length - 1)
-
-            return t.memberExpression(
-              generateMemberExpression(others),
-              t.identifier(last),
-              false
-            )
-          }
-
+          
           path.remove()
           //path.parentPath.replaceWithSourceString(`${includePath} = {}`);
         }
+
+        function generateMemberExpression(namespaces){
+          
+          if (namespaces.length == 1)
+            return t.identifier(namespaces[0])
+
+          if (namespaces.length == 2)
+            return t.memberExpression(
+              t.identifier(namespaces[0]),
+              t.identifier(namespaces[1]),
+              false
+            )
+
+          
+          var last = namespaces[namespaces.length - 1]
+          var others = namespaces.slice(0, namespaces.length - 1)
+
+          return t.memberExpression(
+            generateMemberExpression(others),
+            t.identifier(last),
+            false
+          )
+        }
+          
       },
       //Program: {
         /**

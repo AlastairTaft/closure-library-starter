@@ -5690,7 +5690,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             plugins: [
-              ["./../../tools/babel-plugin/test/googPlugin"],
+              ["./../../tools/babel-plugin/googPlugin"],
               ["transform-react-jsx", {
                 "pragma": "DomHelper.createElement" // default pragma is React.createElement
               }]
