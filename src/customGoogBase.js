@@ -1230,7 +1230,7 @@ if (goog.DEPENDENCIES_ENABLED) {
           throw new Error('Cannot write "' + src + '" after document load');
         }
       }
-
+      debugger
       if (opt_sourceText === undefined) {
         if (!goog.IS_OLD_IE_) {
           if (goog.ENABLE_CHROME_APP_SAFE_SCRIPT_LOADING) {
@@ -1419,10 +1419,10 @@ if (goog.DEPENDENCIES_ENABLED) {
 
   goog.findBasePath_();
 
-  // Allow projects to manage the deps files themselves.
-  if (!goog.global.CLOSURE_NO_DEPS) {
-    goog.importScript_(goog.basePath + 'deps.js');
-  }
+  // We don't need this as we're using ES6 modules to handle deps
+  //if (!goog.global.CLOSURE_NO_DEPS) {
+  //  goog.importScript_(goog.basePath + 'deps.js');
+  //}
 }
 
 

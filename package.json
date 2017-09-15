@@ -25,7 +25,8 @@
     "webpack-closure-compiler": "^2.1.5"
   },
   "scripts": {
-    "start": "node --stack-size=99999 --max_executable_size=99999 --initial_old_space_size=99999 --max_old_space_size=99999 --max-executable-size=99999 --initial-old-space-size=99999 --max-old-space-size=99999 start.js",
+    "start": "node --stack-size=99999 start.js",
+    "build": "node --stack-size=99999 build.js",
     "generate:aliases": "node tools/generateGoogWebpackAliases/testRun.js src",
     "testTools": "mocha tools/**/*_test.js --recursive --compilers js:babel-register,jsx:babel-register"
   },
@@ -35,6 +36,7 @@
     "babel-preset-env": "^1.6.0",
     "babylon": "^6.18.0",
     "chai": "^4.1.2",
-    "mocha": "^3.5.3"
+    "mocha": "^3.5.3",
+    "webpack-dev-server": "^2.8.2"
   }
 }
