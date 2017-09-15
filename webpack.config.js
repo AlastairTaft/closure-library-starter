@@ -5692,7 +5692,7 @@ module.exports = {
             plugins: [
               ["./../../tools/babel-plugin/googPlugin"],
               ["transform-react-jsx", {
-                "pragma": "DomHelper.createElement" // default pragma is React.createElement
+                "pragma": "this.dom_.createDom" // default pragma is React.createElement
               }]
             ]
           }

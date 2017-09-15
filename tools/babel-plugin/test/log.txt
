@@ -1,1 +1,19 @@
-[ 'goog', 'debug' ][ 'goog', 'debug', 'Debug' ][ 'goog', 'debug' ][ 'goog', 'debug', 'Debug' ][ 'goog', 'debug' ][ 'goog', 'debug', 'Debug' ]
+Node {
+  type: 'StringLiteral',
+  start: 19,
+  end: 31,
+  loc: 
+   SourceLocation {
+     start: Position { line: 1, column: 19 },
+     end: Position { line: 1, column: 31 } },
+  extra: { rawValue: 'goog.array', raw: '\'goog.array\'' },
+  value: 'goog.array' }Node {
+  type: 'StringLiteral',
+  start: 19,
+  end: 31,
+  loc: 
+   SourceLocation {
+     start: Position { line: 1, column: 19 },
+     end: Position { line: 1, column: 31 } },
+  extra: { rawValue: 'goog.array', raw: '\'goog.array\'' },
+  value: 'goog.array' }

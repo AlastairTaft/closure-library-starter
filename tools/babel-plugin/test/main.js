@@ -1,1 +1,1 @@
-goog.provide('goog.debug.Debug')
+var test = require('goog.array')

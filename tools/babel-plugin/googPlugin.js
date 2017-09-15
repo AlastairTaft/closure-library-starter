@@ -49,7 +49,7 @@ module.exports = function({ types: t }) {
           //path.insertBefore(t.expressionStatement(t.stringLiteral("Because I'm easy come, easy go.")));
           
           //path.parentPath.replaceWithSourceString(`${declareString}${includePath} = require("${includePath}")`);
-          path.parentPath.replaceWithSourceString(`${includePath} = require("${includePath}")`);
+          path.parentPath.replaceWithSourceString(`${includePath} = require("${includePath}").${includePath.slice('goog.'.length)}`);
           //path.insertBefore(t.variableDeclaration("var", [
           //  t.variableDeclarator("test", path.node) 
           //]))
@@ -58,6 +58,23 @@ module.exports = function({ types: t }) {
           var includePath = path.node.arguments[0].value
           var namespaces = includePath.split('.')
           
+          path.insertBefore(
+            t.expressionStatement(
+              t.assignmentExpression(
+                '=',
+                //t.identifier('goog'),
+                t.memberExpression(
+                  t.identifier('module'),
+                  t.identifier('exports'),
+                  false
+                ),
+                //t.stringLiteral('test')
+                //t.objectExpression([])
+                t.identifier('goog')
+              )
+            ) 
+          );
+
           for (var i = 1; i < namespaces.length; i++){
             var thisNamespaces =  namespaces.slice(0, i + 1)
             //statements.push(`${nextNameSpace} = ${nextNameSpace} || {};`)
@@ -86,6 +103,7 @@ module.exports = function({ types: t }) {
           //path.parentPath.replaceWithSourceString(`${includePath} = {}`);
         }
 
+
         function generateMemberExpression(namespaces){
           
           if (namespaces.length == 1)
@@ -109,6 +127,54 @@ module.exports = function({ types: t }) {
           )
         }
           
+      },
+      VariableDeclaration(path, state){
+        /*
+        if (t.isMemberExpression(callee) && isRegularRequireGoogCall(callee)) {
+          path.parentPath.replaceWithSourceString(`test`);
+          
+        }*/
+        path.node.declarations.forEach(d => {
+          if (t.isCallExpression(d.init)){
+            
+            
+            var callee = d.init.callee;
+            //log(d.init.arguments[0])
+
+            if (d.init.callee.name == 'require' 
+              && d.init.arguments.length == 1
+              && d.init.arguments[0].value.startsWith('goog.')){
+
+              var includePath = d.init.arguments[0].value.slice('goog.'.length)
+              
+              d.init = t.memberExpression(
+                d.init,
+                t.identifier(includePath),
+                false
+              )
+            }
+
+            /*d.init.callee = t.memberExpression(
+              callee,
+              t.identifier('test'),
+              false
+            )*/
+
+            if (t.isMemberExpression(callee) && isRegularRequireGoogCall(callee)) {
+    
+              
+              //if (path.node.callee.object.name == 'goog'
+              //  && path.node.callee.property.name == 'require'
+              //  && path.node.arguments.length == 1){
+              //var includePath = path.node.arguments[0].value
+
+
+              //path.replaceWithSourceString(`require2("${includePath}").${includePath.slice('goog.'.length)}`);
+
+            }
+          }
+        })
+       
       },
       //Program: {
         /**
@@ -155,6 +221,12 @@ function isGoogRequireCall(member) {
 
 function isGoogProvideCall(member) {
   return member.object.name === 'goog' && member.property.name === 'provide'
+}
+
+function isRegularRequireGoogCall(member){
+  //log(member)
+  // TODO
+  return true
 }
 
 function log(message){
