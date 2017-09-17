@@ -33,9 +33,13 @@ module.exports = {
     new ClosureCompilerPlugin({
     compiler: {
       jar: 'tools/closure-compiler/v20170910.jar', //optional 
-      language_in: 'ECMASCRIPT6',
+      language_in: 'ECMASCRIPT_2017',
       language_out: 'ECMASCRIPT5',
-      compilation_level: 'ADVANCED'
+      compilation_level: 'ADVANCED',
+      isolation_mode: "IIFE",
+      jscomp_off: "*",
+      //continue_after_errors: true,
+      assume_function_wrapper: true,
     },
     concurrency: 3,
   })] : [],

@@ -63,4 +63,92 @@ goog.debug.Debug = goog.debug.Debug || {};`
 
     expect(code).to.equal(expectedOutput)
   })
+
+  it(`should remove all instances of goog.scope as this isn't compatible with
+    webpack, and the functionality it brings is not needed with CommonJS 
+    module loading`.replace(/\s+/g, ' '), () => {
+
+      var input = `goog.scope(function(){
+var something = "test";     
+});`
+      
+      var expectedOutput = ``
+  
+      var options = {
+        plugins: [require('./googPlugin.js')],
+      }
+  
+      const ast1 = babylon.parse(input, options);
+      const { code, map, ast } = babel.transformFromAst(ast1, input, options);
+  
+      expect(code).to.equal(expectedOutput)
+
+  })
+
+  it(`should remove instances of goog.define as we're not using the global
+    scope, it also isn't compatible with webpack`.replace(/\s+/g, ' '), () => {
+    
+    var input = `goog.define('goog.asserts.ENABLE_ASSERTS', goog.DEBUG);`
+    var expectedOutput = ``
+
+    var options = {
+      plugins: [require('./googPlugin.js')],
+    }
+
+    const ast1 = babylon.parse(input, options);
+    const { code, map, ast } = babel.transformFromAst(ast1, input, options);
+
+    expect(code).to.equal(expectedOutput)
+  })
+
+  it(`should remove preceeding comment if removing a node else closure's jsdoc
+    understanding will apply to the next statement`, () => {
+
+    var input = `/**
+ * @define {string} Path to the transpiler.  Executing the script at this
+ * path (relative to base.js) should define a function $jscomp.transpile.
+ */
+goog.define('goog.TRANSPILER', 'transpile.js');
+if (goog.DEPENDENCIES_ENABLED) {}`
+
+    var expectedOutput = `
+if (goog.DEPENDENCIES_ENABLED) {}`
+
+    var options = {
+      plugins: [require('./googPlugin.js')],
+    }
+
+    const ast1 = babylon.parse(input, options);
+    const { code, map, ast } = babel.transformFromAst(ast1, input, options);
+
+    expect(code).to.equal(expectedOutput)
+
+  })
+
+  it(`should remove the defined comment and the define code`, () => {
+
+    var input = `/**
+  * @define {boolean} DEBUG is provided as a convenience so that debugging code
+  * that should not be included in a production. It can be easily stripped
+  * by specifying --define goog.DEBUG=false to the Closure Compiler aka
+  * JSCompiler. For example, most toString() methods should be declared inside an
+  * "if (goog.DEBUG)" conditional because they are generally used for debugging
+  * purposes and it is difficult for the JSCompiler to statically determine
+  * whether they are used.
+  */
+goog.define('goog.DEBUG', true);`
+
+var expectedOutput = ``
+
+    var options = {
+      plugins: [require('./googPlugin.js')],
+    }
+
+    const ast1 = babylon.parse(input, options);
+    const { code, map, ast } = babel.transformFromAst(ast1, input, options);
+
+    expect(code).to.equal(expectedOutput)
+
+  })
+
 })

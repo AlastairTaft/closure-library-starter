@@ -6,6 +6,9 @@ var util = require('util')
 module.exports = function({ types: t }) {
   return {
     visitor: {
+      Identifier(path) {
+        //log(path)
+      },
       CallExpression(path, state) {
         var callee = path.node.callee;
         if (t.isMemberExpression(callee) && isGoogRequireCall(callee)) {
@@ -53,8 +56,7 @@ module.exports = function({ types: t }) {
           //path.insertBefore(t.variableDeclaration("var", [
           //  t.variableDeclarator("test", path.node) 
           //]))
-        }
-        if (t.isMemberExpression(callee) && isGoogProvideCall(callee)) {
+        } else if (t.isMemberExpression(callee) && isGoogProvideCall(callee)) {
           var includePath = path.node.arguments[0].value
           var namespaces = includePath.split('.')
           
@@ -101,6 +103,22 @@ module.exports = function({ types: t }) {
           
           path.remove()
           //path.parentPath.replaceWithSourceString(`${includePath} = {}`);
+        } else {
+          var callee = path.node.callee
+          //log(callee.object.name)
+          //log(callee.property.name)
+          if (callee.object && callee.object.name == 'goog' 
+            && callee.property && callee.property.name == 'scope'){
+            path.remove()
+          } else if (callee.object && callee.object.name == 'goog' 
+            && callee.property && callee.property.name == 'define'){
+            //log(path.node)
+            //log(path.parent.leadingComments)
+            path.parent.leadingComments = null
+              //t.removeComments(path.node);
+            path.remove()
+            //callee.property.name == 'noop'
+          }
         }
 
 

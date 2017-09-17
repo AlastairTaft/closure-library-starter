@@ -26,10 +26,7 @@
  */
 
 
-/**
- * @define {boolean} Overridden to true by the compiler.
- */
-var COMPILED = false;
+global['COMPILED'] = false;
 
 
 /**
@@ -39,8 +36,12 @@ var COMPILED = false;
  *
  * @const
  */
-var goog = global.goog || {};
-global.goog = goog
+//var goog = global['goog'] || {};
+//global['goog'] = goog
+var goog = global['goog'] = {}
+
+goog.LOCALE = 'en_GB'
+
 
 /**
  * Reference to the global context.  In most cases this will be 'window'.
@@ -164,111 +165,7 @@ goog.exportPath_ = function(name, opt_object, opt_objectToExportTo) {
 };
 
 
-/**
- * Defines a named value. In uncompiled mode, the value is retrieved from
- * CLOSURE_DEFINES or CLOSURE_UNCOMPILED_DEFINES if the object is defined and
- * has the property specified, and otherwise used the defined defaultValue.
- * When compiled the default can be overridden using the compiler
- * options or the value set in the CLOSURE_DEFINES object.
- *
- * @param {string} name The distinguished name to provide.
- * @param {string|number|boolean} defaultValue
- */
-goog.define = function(name, defaultValue) {
-  var value = defaultValue;
-  if (!COMPILED) {
-    if (goog.global.CLOSURE_UNCOMPILED_DEFINES &&
-        // Anti DOM-clobbering runtime check (b/37736576).
-        /** @type {?} */ (goog.global.CLOSURE_UNCOMPILED_DEFINES).nodeType ===
-            undefined &&
-        Object.prototype.hasOwnProperty.call(
-            goog.global.CLOSURE_UNCOMPILED_DEFINES, name)) {
-      value = goog.global.CLOSURE_UNCOMPILED_DEFINES[name];
-    } else if (
-        goog.global.CLOSURE_DEFINES &&
-        // Anti DOM-clobbering runtime check (b/37736576).
-        /** @type {?} */ (goog.global.CLOSURE_DEFINES).nodeType === undefined &&
-        Object.prototype.hasOwnProperty.call(
-            goog.global.CLOSURE_DEFINES, name)) {
-      value = goog.global.CLOSURE_DEFINES[name];
-    }
-  }
-  goog.exportPath_(name, value);
-};
 
-
-/**
- * @define {boolean} DEBUG is provided as a convenience so that debugging code
- * that should not be included in a production. It can be easily stripped
- * by specifying --define goog.DEBUG=false to the Closure Compiler aka
- * JSCompiler. For example, most toString() methods should be declared inside an
- * "if (goog.DEBUG)" conditional because they are generally used for debugging
- * purposes and it is difficult for the JSCompiler to statically determine
- * whether they are used.
- */
-goog.define('goog.DEBUG', true);
-
-
-/**
- * @define {string} LOCALE defines the locale being used for compilation. It is
- * used to select locale specific data to be compiled in js binary. BUILD rule
- * can specify this value by "--define goog.LOCALE=<locale_name>" as a compiler
- * option.
- *
- * Take into account that the locale code format is important. You should use
- * the canonical Unicode format with hyphen as a delimiter. Language must be
- * lowercase, Language Script - Capitalized, Region - UPPERCASE.
- * There are few examples: pt-BR, en, en-US, sr-Latin-BO, zh-Hans-CN.
- *
- * See more info about locale codes here:
- * http://www.unicode.org/reports/tr35/#Unicode_Language_and_Locale_Identifiers
- *
- * For language codes you should use values defined by ISO 693-1. See it here
- * http://www.w3.org/WAI/ER/IG/ert/iso639.htm. There is only one exception from
- * this rule: the Hebrew language. For legacy reasons the old code (iw) should
- * be used instead of the new code (he).
- *
- */
-goog.define('goog.LOCALE', 'en');  // default to en
-
-
-/**
- * @define {boolean} Whether this code is running on trusted sites.
- *
- * On untrusted sites, several native functions can be defined or overridden by
- * external libraries like Prototype, Datejs, and JQuery and setting this flag
- * to false forces closure to use its own implementations when possible.
- *
- * If your JavaScript can be loaded by a third party site and you are wary about
- * relying on non-standard implementations, specify
- * "--define goog.TRUSTED_SITE=false" to the compiler.
- */
-goog.define('goog.TRUSTED_SITE', true);
-
-
-/**
- * @define {boolean} Whether a project is expected to be running in strict mode.
- *
- * This define can be used to trigger alternate implementations compatible with
- * running in EcmaScript Strict mode or warn about unavailable functionality.
- * @see https://goo.gl/PudQ4y
- *
- */
-goog.define('goog.STRICT_MODE_COMPATIBLE', false);
-
-
-/**
- * @define {boolean} Whether code that calls {@link goog.setTestOnly} should
- *     be disallowed in the compilation unit.
- */
-goog.define('goog.DISALLOW_TEST_ONLY_CODE', COMPILED && !goog.DEBUG);
-
-
-/**
- * @define {boolean} Whether to use a Chrome app CSP-compliant method for
- *     loading scripts via goog.require. @see appendScriptSrcNode_.
- */
-goog.define('goog.ENABLE_CHROME_APP_SAFE_SCRIPT_LOADING', false);
 
 
 /**
@@ -654,19 +551,6 @@ goog.addDependency = function(relPath, provides, requires, opt_loadFlags) {
 
 
 /**
- * @define {boolean} Whether to enable the debug loader.
- *
- * If enabled, a call to goog.require() will attempt to load the namespace by
- * appending a script tag to the DOM (if the namespace has been registered).
- *
- * If disabled, goog.require() will simply assert that the namespace has been
- * provided (and depend on the fact that some outside tool correctly ordered
- * the script).
- */
-goog.define('goog.ENABLE_DEBUG_LOADER', true);
-
-
-/**
  * @param {string} msg
  * @private
  */
@@ -805,24 +689,6 @@ goog.addSingletonGetter = function(ctor) {
  */
 goog.instantiatedSingletons_ = [];
 
-
-/**
- * @define {boolean} Whether to load goog.modules using {@code eval} when using
- * the debug loader.  This provides a better debugging experience as the
- * source is unmodified and can be edited using Chrome Workspaces or similar.
- * However in some environments the use of {@code eval} is banned
- * so we provide an alternative.
- */
-goog.define('goog.LOAD_MODULE_USING_EVAL', true);
-
-
-/**
- * @define {boolean} Whether the exports of goog.modules should be sealed when
- * possible.
- */
-goog.define('goog.SEAL_MODULE_EXPORTS', goog.DEBUG);
-
-
 /**
  * The registry of initialized modules:
  * the module identifier to module exports map.
@@ -837,24 +703,6 @@ goog.loadedModules_ = {};
  */
 goog.DEPENDENCIES_ENABLED = !COMPILED && goog.ENABLE_DEBUG_LOADER;
 
-
-/**
- * @define {string} How to decide whether to transpile.  Valid values
- * are 'always', 'never', and 'detect'.  The default ('detect') is to
- * use feature detection to determine which language levels need
- * transpilation.
- */
-// NOTE(user): we could expand this to accept a language level to bypass
-// detection: e.g. goog.TRANSPILE == 'es5' would transpile ES6 files but
-// would leave ES3 and ES5 files alone.
-goog.define('goog.TRANSPILE', 'detect');
-
-
-/**
- * @define {string} Path to the transpiler.  Executing the script at this
- * path (relative to base.js) should define a function $jscomp.transpile.
- */
-goog.define('goog.TRANSPILER', 'transpile.js');
 
 
 if (goog.DEPENDENCIES_ENABLED) {
@@ -2612,6 +2460,9 @@ goog.scope = function(fn) {
   }
   fn.call(goog.global);
 };
+// To satisfy this being called in the global scope when wrapped in a webpack
+// scoped function
+goog.scope.bind(global)
 
 
 /*
@@ -2696,16 +2547,6 @@ goog.defineClass = function(superClass, def) {
  * }}
  */
 goog.defineClass.ClassDescriptor;
-
-
-/**
- * @define {boolean} Whether the instances returned by goog.defineClass should
- *     be sealed when possible.
- *
- * When sealing is disabled the constructor function will not be wrapped by
- * goog.defineClass, making it incompatible with ES6 class methods.
- */
-goog.define('goog.defineClass.SEAL_CLASS_INSTANCES', goog.DEBUG);
 
 
 /**

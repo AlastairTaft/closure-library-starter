@@ -1,19 +1,515 @@
 Node {
-  type: 'StringLiteral',
-  start: 19,
-  end: 31,
+  type: 'CallExpression',
+  start: 545,
+  end: 576,
   loc: 
    SourceLocation {
-     start: Position { line: 1, column: 19 },
-     end: Position { line: 1, column: 31 } },
-  extra: { rawValue: 'goog.array', raw: '\'goog.array\'' },
-  value: 'goog.array' }Node {
-  type: 'StringLiteral',
-  start: 19,
-  end: 31,
+     start: Position { line: 14, column: 0 },
+     end: Position { line: 14, column: 31 } },
+  callee: 
+   Node {
+     type: 'MemberExpression',
+     start: 545,
+     end: 556,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     object: 
+      Node {
+        type: 'Identifier',
+        start: 545,
+        end: 549,
+        loc: [Object],
+        name: 'goog',
+        leadingComments: null },
+     property: 
+      Node {
+        type: 'Identifier',
+        start: 550,
+        end: 556,
+        loc: [Object],
+        name: 'define' },
+     computed: false,
+     leadingComments: null },
+  arguments: 
+   [ Node {
+       type: 'StringLiteral',
+       start: 557,
+       end: 569,
+       loc: [Object],
+       extra: [Object],
+       value: 'goog.DEBUG' },
+     Node {
+       type: 'BooleanLiteral',
+       start: 571,
+       end: 575,
+       loc: [Object],
+       value: true } ],
+  leadingComments: null }Node {
+  type: 'ExpressionStatement',
+  start: 545,
+  end: 577,
   loc: 
    SourceLocation {
-     start: Position { line: 1, column: 19 },
-     end: Position { line: 1, column: 31 } },
-  extra: { rawValue: 'goog.array', raw: '\'goog.array\'' },
-  value: 'goog.array' }
+     start: Position { line: 14, column: 0 },
+     end: Position { line: 14, column: 32 } },
+  expression: 
+   Node {
+     type: 'CallExpression',
+     start: 545,
+     end: 576,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     callee: 
+      Node {
+        type: 'MemberExpression',
+        start: 545,
+        end: 556,
+        loc: [Object],
+        object: [Object],
+        property: [Object],
+        computed: false,
+        leadingComments: null },
+     arguments: [ [Object], [Object] ],
+     leadingComments: null },
+  leadingComments: 
+   [ { type: 'CommentBlock',
+       value: '*\n * @define {boolean} DEBUG is provided as a convenience so that debugging code\n * that should not be included in a production. It can be easily stripped\n * by specifying --define goog.DEBUG=false to the Closure Compiler aka\n * JSCompiler. For example, most toString() methods should be declared inside an\n * "if (goog.DEBUG)" conditional because they are generally used for debugging\n * purposes and it is difficult for the JSCompiler to statically determine\n * whether they are used.\n ',
+       start: 52,
+       end: 544,
+       loc: [Object] } ] }Node {
+  type: 'CallExpression',
+  start: 545,
+  end: 576,
+  loc: 
+   SourceLocation {
+     start: Position { line: 14, column: 0 },
+     end: Position { line: 14, column: 31 } },
+  callee: 
+   Node {
+     type: 'MemberExpression',
+     start: 545,
+     end: 556,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     object: 
+      Node {
+        type: 'Identifier',
+        start: 545,
+        end: 549,
+        loc: [Object],
+        name: 'goog',
+        leadingComments: null },
+     property: 
+      Node {
+        type: 'Identifier',
+        start: 550,
+        end: 556,
+        loc: [Object],
+        name: 'define' },
+     computed: false,
+     leadingComments: null },
+  arguments: 
+   [ Node {
+       type: 'StringLiteral',
+       start: 557,
+       end: 569,
+       loc: [Object],
+       extra: [Object],
+       value: 'goog.DEBUG' },
+     Node {
+       type: 'BooleanLiteral',
+       start: 571,
+       end: 575,
+       loc: [Object],
+       value: true } ],
+  leadingComments: null }Node {
+  type: 'ExpressionStatement',
+  start: 545,
+  end: 577,
+  loc: 
+   SourceLocation {
+     start: Position { line: 14, column: 0 },
+     end: Position { line: 14, column: 32 } },
+  expression: 
+   Node {
+     type: 'CallExpression',
+     start: 545,
+     end: 576,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     callee: 
+      Node {
+        type: 'MemberExpression',
+        start: 545,
+        end: 556,
+        loc: [Object],
+        object: [Object],
+        property: [Object],
+        computed: false,
+        leadingComments: null },
+     arguments: [ [Object], [Object] ],
+     leadingComments: null },
+  leadingComments: 
+   [ { type: 'CommentBlock',
+       value: '*\n * @define {boolean} DEBUG is provided as a convenience so that debugging code\n * that should not be included in a production. It can be easily stripped\n * by specifying --define goog.DEBUG=false to the Closure Compiler aka\n * JSCompiler. For example, most toString() methods should be declared inside an\n * "if (goog.DEBUG)" conditional because they are generally used for debugging\n * purposes and it is difficult for the JSCompiler to statically determine\n * whether they are used.\n ',
+       start: 52,
+       end: 544,
+       loc: [Object] } ] }Node {
+  type: 'CallExpression',
+  start: 495,
+  end: 526,
+  loc: 
+   SourceLocation {
+     start: Position { line: 12, column: 0 },
+     end: Position { line: 12, column: 31 } },
+  callee: 
+   Node {
+     type: 'MemberExpression',
+     start: 495,
+     end: 506,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     object: 
+      Node {
+        type: 'Identifier',
+        start: 495,
+        end: 499,
+        loc: [Object],
+        name: 'goog',
+        leadingComments: null },
+     property: 
+      Node {
+        type: 'Identifier',
+        start: 500,
+        end: 506,
+        loc: [Object],
+        name: 'define' },
+     computed: false,
+     leadingComments: null },
+  arguments: 
+   [ Node {
+       type: 'StringLiteral',
+       start: 507,
+       end: 519,
+       loc: [Object],
+       extra: [Object],
+       value: 'goog.DEBUG' },
+     Node {
+       type: 'BooleanLiteral',
+       start: 521,
+       end: 525,
+       loc: [Object],
+       value: true } ],
+  leadingComments: null }Node {
+  type: 'ExpressionStatement',
+  start: 495,
+  end: 527,
+  loc: 
+   SourceLocation {
+     start: Position { line: 12, column: 0 },
+     end: Position { line: 12, column: 32 } },
+  expression: 
+   Node {
+     type: 'CallExpression',
+     start: 495,
+     end: 526,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     callee: 
+      Node {
+        type: 'MemberExpression',
+        start: 495,
+        end: 506,
+        loc: [Object],
+        object: [Object],
+        property: [Object],
+        computed: false,
+        leadingComments: null },
+     arguments: [ [Object], [Object] ],
+     leadingComments: null },
+  leadingComments: 
+   [ { type: 'CommentBlock',
+       value: '*\n * @define {boolean} DEBUG is provided as a convenience so that debugging code\n * that should not be included in a production. It can be easily stripped\n * by specifying --define goog.DEBUG=false to the Closure Compiler aka\n * JSCompiler. For example, most toString() methods should be declared inside an\n * "if (goog.DEBUG)" conditional because they are generally used for debugging\n * purposes and it is difficult for the JSCompiler to statically determine\n * whether they are used.\n ',
+       start: 2,
+       end: 494,
+       loc: [Object] } ] }Node {
+  type: 'CallExpression',
+  start: 52,
+  end: 71,
+  loc: 
+   SourceLocation {
+     start: Position { line: 5, column: 0 },
+     end: Position { line: 5, column: 19 } },
+  callee: 
+   Node {
+     type: 'MemberExpression',
+     start: 52,
+     end: 63,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     object: 
+      Node {
+        type: 'Identifier',
+        start: 52,
+        end: 59,
+        loc: [Object],
+        name: 'console' },
+     property: 
+      Node {
+        type: 'Identifier',
+        start: 60,
+        end: 63,
+        loc: [Object],
+        name: 'log' },
+     computed: false },
+  arguments: 
+   [ Node {
+       type: 'StringLiteral',
+       start: 64,
+       end: 70,
+       loc: [Object],
+       extra: [Object],
+       value: 'test' } ],
+  trailingComments: null }Node {
+  type: 'ExpressionStatement',
+  start: 52,
+  end: 71,
+  loc: 
+   SourceLocation {
+     start: Position { line: 5, column: 0 },
+     end: Position { line: 5, column: 19 } },
+  expression: 
+   Node {
+     type: 'CallExpression',
+     start: 52,
+     end: 71,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     callee: 
+      Node {
+        type: 'MemberExpression',
+        start: 52,
+        end: 63,
+        loc: [Object],
+        object: [Object],
+        property: [Object],
+        computed: false },
+     arguments: [ [Object] ],
+     trailingComments: null },
+  trailingComments: 
+   [ { type: 'CommentBlock',
+       value: '*\n * @define {boolean} DEBUG is provided as a convenience so that debugging code\n * that should not be included in a production. It can be easily stripped\n * by specifying --define goog.DEBUG=false to the Closure Compiler aka\n * JSCompiler. For example, most toString() methods should be declared inside an\n * "if (goog.DEBUG)" conditional because they are generally used for debugging\n * purposes and it is difficult for the JSCompiler to statically determine\n * whether they are used.\n ',
+       start: 73,
+       end: 565,
+       loc: [Object] } ] }Node {
+  type: 'CallExpression',
+  start: 566,
+  end: 597,
+  loc: 
+   SourceLocation {
+     start: Position { line: 16, column: 0 },
+     end: Position { line: 16, column: 31 } },
+  callee: 
+   Node {
+     type: 'MemberExpression',
+     start: 566,
+     end: 577,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     object: 
+      Node {
+        type: 'Identifier',
+        start: 566,
+        end: 570,
+        loc: [Object],
+        name: 'goog',
+        leadingComments: null },
+     property: 
+      Node {
+        type: 'Identifier',
+        start: 571,
+        end: 577,
+        loc: [Object],
+        name: 'define' },
+     computed: false,
+     leadingComments: null },
+  arguments: 
+   [ Node {
+       type: 'StringLiteral',
+       start: 578,
+       end: 590,
+       loc: [Object],
+       extra: [Object],
+       value: 'goog.DEBUG' },
+     Node {
+       type: 'BooleanLiteral',
+       start: 592,
+       end: 596,
+       loc: [Object],
+       value: true } ],
+  leadingComments: null }Node {
+  type: 'ExpressionStatement',
+  start: 566,
+  end: 598,
+  loc: 
+   SourceLocation {
+     start: Position { line: 16, column: 0 },
+     end: Position { line: 16, column: 32 } },
+  expression: 
+   Node {
+     type: 'CallExpression',
+     start: 566,
+     end: 597,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     callee: 
+      Node {
+        type: 'MemberExpression',
+        start: 566,
+        end: 577,
+        loc: [Object],
+        object: [Object],
+        property: [Object],
+        computed: false,
+        leadingComments: null },
+     arguments: [ [Object], [Object] ],
+     leadingComments: null },
+  leadingComments: 
+   [ { type: 'CommentBlock',
+       value: '*\n * @define {boolean} DEBUG is provided as a convenience so that debugging code\n * that should not be included in a production. It can be easily stripped\n * by specifying --define goog.DEBUG=false to the Closure Compiler aka\n * JSCompiler. For example, most toString() methods should be declared inside an\n * "if (goog.DEBUG)" conditional because they are generally used for debugging\n * purposes and it is difficult for the JSCompiler to statically determine\n * whether they are used.\n ',
+       start: 73,
+       end: 565,
+       loc: [Object] } ] }Node {
+  type: 'CallExpression',
+  start: 52,
+  end: 71,
+  loc: 
+   SourceLocation {
+     start: Position { line: 5, column: 0 },
+     end: Position { line: 5, column: 19 } },
+  callee: 
+   Node {
+     type: 'MemberExpression',
+     start: 52,
+     end: 63,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     object: 
+      Node {
+        type: 'Identifier',
+        start: 52,
+        end: 59,
+        loc: [Object],
+        name: 'console' },
+     property: 
+      Node {
+        type: 'Identifier',
+        start: 60,
+        end: 63,
+        loc: [Object],
+        name: 'log' },
+     computed: false },
+  arguments: 
+   [ Node {
+       type: 'StringLiteral',
+       start: 64,
+       end: 70,
+       loc: [Object],
+       extra: [Object],
+       value: 'test' } ],
+  trailingComments: null }Node {
+  type: 'ExpressionStatement',
+  start: 52,
+  end: 71,
+  loc: 
+   SourceLocation {
+     start: Position { line: 5, column: 0 },
+     end: Position { line: 5, column: 19 } },
+  expression: 
+   Node {
+     type: 'CallExpression',
+     start: 52,
+     end: 71,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     callee: 
+      Node {
+        type: 'MemberExpression',
+        start: 52,
+        end: 63,
+        loc: [Object],
+        object: [Object],
+        property: [Object],
+        computed: false },
+     arguments: [ [Object] ],
+     trailingComments: null },
+  trailingComments: 
+   [ { type: 'CommentBlock',
+       value: '*\n * @define {boolean} DEBUG is provided as a convenience so that debugging code\n * that should not be included in a production. It can be easily stripped\n * by specifying --define goog.DEBUG=false to the Closure Compiler aka\n * JSCompiler. For example, most toString() methods should be declared inside an\n * "if (goog.DEBUG)" conditional because they are generally used for debugging\n * purposes and it is difficult for the JSCompiler to statically determine\n * whether they are used.\n ',
+       start: 73,
+       end: 565,
+       loc: [Object] } ] }Node {
+  type: 'CallExpression',
+  start: 566,
+  end: 597,
+  loc: 
+   SourceLocation {
+     start: Position { line: 16, column: 0 },
+     end: Position { line: 16, column: 31 } },
+  callee: 
+   Node {
+     type: 'MemberExpression',
+     start: 566,
+     end: 577,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     object: 
+      Node {
+        type: 'Identifier',
+        start: 566,
+        end: 570,
+        loc: [Object],
+        name: 'goog',
+        leadingComments: null },
+     property: 
+      Node {
+        type: 'Identifier',
+        start: 571,
+        end: 577,
+        loc: [Object],
+        name: 'define' },
+     computed: false,
+     leadingComments: null },
+  arguments: 
+   [ Node {
+       type: 'StringLiteral',
+       start: 578,
+       end: 590,
+       loc: [Object],
+       extra: [Object],
+       value: 'goog.DEBUG' },
+     Node {
+       type: 'BooleanLiteral',
+       start: 592,
+       end: 596,
+       loc: [Object],
+       value: true } ],
+  leadingComments: null }Node {
+  type: 'ExpressionStatement',
+  start: 566,
+  end: 598,
+  loc: 
+   SourceLocation {
+     start: Position { line: 16, column: 0 },
+     end: Position { line: 16, column: 32 } },
+  expression: 
+   Node {
+     type: 'CallExpression',
+     start: 566,
+     end: 597,
+     loc: SourceLocation { start: [Object], end: [Object] },
+     callee: 
+      Node {
+        type: 'MemberExpression',
+        start: 566,
+        end: 577,
+        loc: [Object],
+        object: [Object],
+        property: [Object],
+        computed: false,
+        leadingComments: null },
+     arguments: [ [Object], [Object] ],
+     leadingComments: null },
+  leadingComments: 
+   [ { type: 'CommentBlock',
+       value: '*\n * @define {boolean} DEBUG is provided as a convenience so that debugging code\n * that should not be included in a production. It can be easily stripped\n * by specifying --define goog.DEBUG=false to the Closure Compiler aka\n * JSCompiler. For example, most toString() methods should be declared inside an\n * "if (goog.DEBUG)" conditional because they are generally used for debugging\n * purposes and it is difficult for the JSCompiler to statically determine\n * whether they are used.\n ',
+       start: 73,
+       end: 565,
+       loc: [Object] } ] }
