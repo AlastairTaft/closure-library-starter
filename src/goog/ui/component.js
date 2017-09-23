@@ -26,15 +26,15 @@ goog.provide('goog.ui.Component.Error');
 goog.provide('goog.ui.Component.EventType');
 goog.provide('goog.ui.Component.State');
 
-goog.require('goog.array');
-goog.require('goog.asserts');
-goog.require('goog.dom');
-goog.require('goog.dom.NodeType');
-goog.require('goog.dom.TagName');
-goog.require('goog.events.EventHandler');
+//goog.require('goog.array');
+//goog.require('goog.asserts');
+//goog.require('goog.dom');
+//goog.require('goog.dom.NodeType');
+//goog.require('goog.dom.TagName');
+//goog.require('goog.events.EventHandler');
 goog.require('goog.events.EventTarget');
-goog.require('goog.object');
-goog.require('goog.style');
+//goog.require('goog.object');
+//goog.require('goog.style');
 goog.require('goog.ui.IdGenerator');
 
 

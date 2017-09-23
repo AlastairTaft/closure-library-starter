@@ -26,8 +26,9 @@
  */
 
 
-global['COMPILED'] = false;
+global['COMPILED'] = true;
 
+var COMPILED = true
 
 /**
  * Base namespace for the Closure library.  Checks to see goog is already
@@ -43,11 +44,13 @@ module.exports = goog
 
 goog.LOCALE = 'en_GB'
 
+var test = "This string should not be in the bundle"
+
 
 /**
  * Reference to the global context.  In most cases this will be 'window'.
  */
-goog.global = global;
+//goog.global = global;
 
 /**
  * A hook for overriding the define values in uncompiled mode.
@@ -420,9 +423,9 @@ goog.forwardDeclare = function(name) {};
  * referenced object that would otherwise result in unknown type references
  * and thus block property disambiguation.
  */
-goog.forwardDeclare('Document');
-goog.forwardDeclare('HTMLScriptElement');
-goog.forwardDeclare('XMLHttpRequest');
+//goog.forwardDeclare('Document');
+//goog.forwardDeclare('HTMLScriptElement');
+//goog.forwardDeclare('XMLHttpRequest');
 
 
 if (!COMPILED) {

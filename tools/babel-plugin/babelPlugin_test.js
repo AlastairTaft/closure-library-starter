@@ -13,9 +13,10 @@ console.log('test')`
 
     var expectedOutput = `var goog = require('goog');
 
-goog.array = require("goog.array").array;
-module.exports = goog;
-goog.dom = goog.dom || {};
+var localGoog = {};
+localGoog.array = require("goog.array").array;
+module.exports = localGoog;
+localGoog.dom = localGoog.dom || {};
 
 console.log('test');`
 
@@ -37,9 +38,10 @@ console.log('test');`
 
     var expectedOutput = `var goog = require('goog');
 
-module.exports = goog;
-goog.debug = goog.debug || {};
-goog.debug.Debug = goog.debug.Debug || {};`
+var localGoog = {};
+module.exports = localGoog;
+localGoog.debug = localGoog.debug || {};
+localGoog.debug.Debug = localGoog.debug.Debug || {};`
 
 
     var options = {
@@ -157,5 +159,22 @@ var expectedOutput = `var goog = require('goog');`
     expect(code).to.equal(expectedOutput)
 
   })
+
+  it(`should remove the defined comment and the define code`, () => {
+    
+        var input = `goog.forwardDeclare('goog.events.EventWrapper');`
+    
+    var expectedOutput = `var goog = require('goog');`
+    
+        var options = {
+          plugins: [require('./googPlugin.js')],
+        }
+    
+        const ast1 = babylon.parse(input, options);
+        const { code, map, ast } = babel.transformFromAst(ast1, input, options);
+    
+        expect(code).to.equal(expectedOutput)
+    
+      })
 
 })

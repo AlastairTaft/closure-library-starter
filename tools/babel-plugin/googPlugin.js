@@ -20,8 +20,11 @@ module.exports = function({ types: t }) {
           var includePath = path.node.arguments[0].value
           // So that it isn't being added to an undefined var
           var namespaces = includePath.split('.')
+          
+          //log(namespaces)
           for (var i = 1; i < namespaces.length -1; i++){
             var thisNamespaces =  namespaces.slice(0, i + 1)
+            //log(thisNamespaces)
             //statements.push(`${nextNameSpace} = ${nextNameSpace} || {};`)
             //log(thisNamespaces)
             var namespacePart = generateMemberExpression(thisNamespaces)
@@ -59,8 +62,14 @@ module.exports = function({ types: t }) {
         } else if (t.isMemberExpression(callee) && isGoogProvideCall(callee)) {
           var includePath = path.node.arguments[0].value
           var namespaces = includePath.split('.')
-          
+          //log(namespaces)
           path.insertBefore([
+            t.variableDeclaration('var', [
+              t.variableDeclarator(
+                t.identifier('localGoog'),
+                t.objectExpression([])
+              )
+            ]),
             t.expressionStatement(
               t.assignmentExpression(
                 '=',
@@ -72,11 +81,11 @@ module.exports = function({ types: t }) {
                 ),
                 //t.stringLiteral('test')
                 //t.objectExpression([])
-                t.identifier('goog')
+                t.identifier('localGoog')
               )
             ) 
           ]);
-
+          namespaces[0] = 'localGoog'
           for (var i = 1; i < namespaces.length; i++){
             var thisNamespaces =  namespaces.slice(0, i + 1)
             //statements.push(`${nextNameSpace} = ${nextNameSpace} || {};`)
@@ -112,6 +121,14 @@ module.exports = function({ types: t }) {
             path.remove()
           } else if (callee.object && callee.object.name == 'goog' 
             && callee.property && callee.property.name == 'define'){
+            //log(path.node)
+            //log(path.parent.leadingComments)
+            path.parent.leadingComments = null
+              //t.removeComments(path.node);
+            path.remove()
+            //callee.property.name == 'noop'
+          } else if (callee.object && callee.object.name == 'goog' 
+            && callee.property && callee.property.name == 'forwardDeclare'){
             //log(path.node)
             //log(path.parent.leadingComments)
             path.parent.leadingComments = null
@@ -164,7 +181,6 @@ module.exports = function({ types: t }) {
               && d.init.arguments[0].value.startsWith('goog.')){
 
               var includePath = d.init.arguments[0].value.slice('goog.'.length)
-              
               d.init = t.memberExpression(
                 d.init,
                 t.identifier(includePath),

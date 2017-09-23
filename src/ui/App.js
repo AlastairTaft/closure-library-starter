@@ -13,7 +13,7 @@ goog.inherits(App, Control)*/
   </div>
 }*/
 
-class App extends Component {
+/*class App extends Component {
   createDom(element){
     this.element_ = <div>
       <h1>Using the closure library</h1>
@@ -23,7 +23,7 @@ class App extends Component {
       </p>
     </div>
   }
-}
+}*/
 
 
-export default App
+export default Component
