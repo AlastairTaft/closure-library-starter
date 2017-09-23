@@ -11,7 +11,9 @@ describe(`babelPlugin`, () => {
 goog.provide('goog.dom')
 console.log('test')`
 
-    var expectedOutput = `goog.array = require("goog.array").array;
+    var expectedOutput = `var goog = require('goog');
+
+goog.array = require("goog.array").array;
 module.exports = goog;
 goog.dom = goog.dom || {};
 
@@ -33,7 +35,9 @@ console.log('test');`
     
     var input = `goog.provide('goog.debug.Debug')`
 
-    var expectedOutput = `module.exports = goog;
+    var expectedOutput = `var goog = require('goog');
+
+module.exports = goog;
 goog.debug = goog.debug || {};
 goog.debug.Debug = goog.debug.Debug || {};`
 
@@ -52,7 +56,9 @@ goog.debug.Debug = goog.debug.Debug || {};`
   it(`should tack on the namespace minus the good for require statements`, () => {
     var input = `var myImport = require('goog.array')`
 
-    var expectedOutput = `var myImport = require('goog.array').array;`
+    var expectedOutput = `var goog = require('goog');
+
+var myImport = require('goog.array').array;`
 
     var options = {
       plugins: [require('./googPlugin.js')],
@@ -72,7 +78,7 @@ goog.debug.Debug = goog.debug.Debug || {};`
 var something = "test";     
 });`
       
-      var expectedOutput = ``
+      var expectedOutput = `var goog = require("goog");`
   
       var options = {
         plugins: [require('./googPlugin.js')],
@@ -89,7 +95,7 @@ var something = "test";
     scope, it also isn't compatible with webpack`.replace(/\s+/g, ' '), () => {
     
     var input = `goog.define('goog.asserts.ENABLE_ASSERTS', goog.DEBUG);`
-    var expectedOutput = ``
+    var expectedOutput = `var goog = require('goog');`
 
     var options = {
       plugins: [require('./googPlugin.js')],
@@ -111,7 +117,8 @@ var something = "test";
 goog.define('goog.TRANSPILER', 'transpile.js');
 if (goog.DEPENDENCIES_ENABLED) {}`
 
-    var expectedOutput = `
+    var expectedOutput = `var goog = require('goog');
+
 if (goog.DEPENDENCIES_ENABLED) {}`
 
     var options = {
@@ -138,7 +145,7 @@ if (goog.DEPENDENCIES_ENABLED) {}`
   */
 goog.define('goog.DEBUG', true);`
 
-var expectedOutput = ``
+var expectedOutput = `var goog = require('goog');`
 
     var options = {
       plugins: [require('./googPlugin.js')],

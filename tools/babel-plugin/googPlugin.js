@@ -60,7 +60,7 @@ module.exports = function({ types: t }) {
           var includePath = path.node.arguments[0].value
           var namespaces = includePath.split('.')
           
-          path.insertBefore(
+          path.insertBefore([
             t.expressionStatement(
               t.assignmentExpression(
                 '=',
@@ -75,7 +75,7 @@ module.exports = function({ types: t }) {
                 t.identifier('goog')
               )
             ) 
-          );
+          ]);
 
           for (var i = 1; i < namespaces.length; i++){
             var thisNamespaces =  namespaces.slice(0, i + 1)
@@ -194,36 +194,32 @@ module.exports = function({ types: t }) {
         })
        
       },
-      //Program: {
+      Program: {
         /**
          * Wraps the program body in a `goog.loadModule` call, if a
          * `goog.module` call was detected inside it.
          * @param {!NodePath} path
          * @param {!Object} state
          */
-        /*exit: function(path, state) {
-          if (!state.foundGoogRequireCall) {
-            return;
-          }
-
+        exit: function(path, state) {
+          
           var contents = path.node.body;
-          contents.push(
-            t.returnStatement(t.identifier('closureExports'))
-          );
-          path.node.body = [t.expressionStatement(t.callExpression(
-            t.memberExpression(
-              t.identifier('goog'),
-              t.identifier('loadModule'),
-              false
-            ),
-            [t.functionExpression(
-              null,
-              [t.identifier('closureExports')],
-              t.blockStatement(contents)
-            )]
-          ))];
+          contents.splice(0, 0, 
+            t.variableDeclaration('var', [
+              t.variableDeclarator(
+                t.identifier('goog'),
+                t.callExpression(
+                  t.identifier('require'), 
+                  [ 
+                    t.stringLiteral('goog')
+                  ]
+                )
+              )
+            ])
+          ); 
+          path.node.body = contents;
         }
-      }*/
+      }
     }
   };
 }

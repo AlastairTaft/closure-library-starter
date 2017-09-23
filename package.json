@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "node --stack-size=99999 start.js",
-    "build": "node --stack-size=99999 build.js ",
+    "build": "NODE_ENV=production node --stack-size=99999 build.js ",
     "generate:aliases": "node tools/generateGoogWebpackAliases/testRun.js src",
     "testTools": "mocha tools/**/*_test.js --recursive --compilers js:babel-register,jsx:babel-register"
   },

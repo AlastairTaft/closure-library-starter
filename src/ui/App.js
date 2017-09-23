@@ -1,5 +1,4 @@
-var DomHelper = require('goog.dom.DomHelper')
-var Control = require('goog.ui.Control')
+var Component = require('goog.ui.Component')
 
 // This commented out version is the ES5 way of declaring a class it works
 // but so does the ES6 way.
@@ -14,7 +13,7 @@ goog.inherits(App, Control)*/
   </div>
 }*/
 
-class App extends Control {
+class App extends Component {
   createDom(element){
     this.element_ = <div>
       <h1>Using the closure library</h1>

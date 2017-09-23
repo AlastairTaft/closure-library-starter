@@ -38,7 +38,8 @@ global['COMPILED'] = false;
  */
 //var goog = global['goog'] || {};
 //global['goog'] = goog
-var goog = global['goog'] = {}
+var goog = {}
+module.exports = goog
 
 goog.LOCALE = 'en_GB'
 

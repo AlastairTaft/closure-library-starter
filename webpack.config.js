@@ -29,7 +29,7 @@ module.exports = {
       }
     ]
   },
-  plugins: process.emitWarning.NODE_ENV == 'production' ? [
+  plugins: process.env.NODE_ENV == 'production' ? [
     new ClosureCompilerPlugin({
     compiler: {
       jar: 'tools/closure-compiler/v20170910.jar', //optional 
@@ -44,6 +44,11 @@ module.exports = {
     concurrency: 3,
   })] : [],
   resolve: {
-    alias: generateGoogWebpackAliases(path.resolve(__dirname, 'src/goog')),
+    alias: Object.assign(
+      {
+        goog$: path.resolve(__dirname, 'src/customGoogBase.js')
+      }, 
+      generateGoogWebpackAliases(path.resolve(__dirname, 'src/goog'))
+    ),
   },
 };
