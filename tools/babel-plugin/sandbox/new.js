@@ -1,7 +1,7 @@
-var goog = require('goog');
+var goog = require('goog'),
+    localGoog = {};
 
-goog.array = require("goog.array").array;
-var localGoog = {};
+localGoog.array = require("goog.array").array;
 module.exports = localGoog;
 localGoog.dom = localGoog.dom || {};
 

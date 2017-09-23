@@ -11,9 +11,9 @@ describe(`babelPlugin`, () => {
 goog.provide('goog.dom')
 console.log('test')`
 
-    var expectedOutput = `var goog = require('goog');
+    var expectedOutput = `var goog = require('goog'),
+    localGoog = {};
 
-var localGoog = {};
 localGoog.array = require("goog.array").array;
 module.exports = localGoog;
 localGoog.dom = localGoog.dom || {};
@@ -36,9 +36,9 @@ console.log('test');`
     
     var input = `goog.provide('goog.debug.Debug')`
 
-    var expectedOutput = `var goog = require('goog');
+    var expectedOutput = `var goog = require('goog'),
+    localGoog = {};
 
-var localGoog = {};
 module.exports = localGoog;
 localGoog.debug = localGoog.debug || {};
 localGoog.debug.Debug = localGoog.debug.Debug || {};`
@@ -58,7 +58,8 @@ localGoog.debug.Debug = localGoog.debug.Debug || {};`
   it(`should tack on the namespace minus the good for require statements`, () => {
     var input = `var myImport = require('goog.array')`
 
-    var expectedOutput = `var goog = require('goog');
+    var expectedOutput = `var goog = require('goog'),
+    localGoog = {};
 
 var myImport = require('goog.array').array;`
 
@@ -80,7 +81,8 @@ var myImport = require('goog.array').array;`
 var something = "test";     
 });`
       
-      var expectedOutput = `var goog = require("goog");`
+      var expectedOutput = `var goog = require("goog"),
+    localGoog = {};`
   
       var options = {
         plugins: [require('./googPlugin.js')],
@@ -97,7 +99,8 @@ var something = "test";
     scope, it also isn't compatible with webpack`.replace(/\s+/g, ' '), () => {
     
     var input = `goog.define('goog.asserts.ENABLE_ASSERTS', goog.DEBUG);`
-    var expectedOutput = `var goog = require('goog');`
+    var expectedOutput = `var goog = require('goog'),
+    localGoog = {};`
 
     var options = {
       plugins: [require('./googPlugin.js')],
@@ -119,7 +122,8 @@ var something = "test";
 goog.define('goog.TRANSPILER', 'transpile.js');
 if (goog.DEPENDENCIES_ENABLED) {}`
 
-    var expectedOutput = `var goog = require('goog');
+    var expectedOutput = `var goog = require('goog'),
+    localGoog = {};
 
 if (goog.DEPENDENCIES_ENABLED) {}`
 
@@ -147,7 +151,8 @@ if (goog.DEPENDENCIES_ENABLED) {}`
   */
 goog.define('goog.DEBUG', true);`
 
-var expectedOutput = `var goog = require('goog');`
+var expectedOutput = `var goog = require('goog'),
+    localGoog = {};`
 
     var options = {
       plugins: [require('./googPlugin.js')],
@@ -164,7 +169,8 @@ var expectedOutput = `var goog = require('goog');`
     
         var input = `goog.forwardDeclare('goog.events.EventWrapper');`
     
-    var expectedOutput = `var goog = require('goog');`
+    var expectedOutput = `var goog = require('goog'),
+    localGoog = {};`
     
         var options = {
           plugins: [require('./googPlugin.js')],
