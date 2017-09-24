@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "node --stack-size=99999 start.js",
-    "build": "NODE_ENV=production node --stack-size=99999 build.js ",
+    "build": "java -jar ./tools/closure-compiler/v20170521.jar --language_in=ECMASCRIPT6 --js_output_file=build/bundle.js --dependency_mode=STRICT --compilation_level=ADVANCED --entry_point=src/index.js --js src/**.js",
     "generate:aliases": "node tools/generateGoogWebpackAliases/testRun.js src",
     "testTools": "mocha tools/**/*_test.js --recursive --compilers js:babel-register,jsx:babel-register"
   },
