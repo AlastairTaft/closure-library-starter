@@ -20,13 +20,8 @@ module.exports = function({ types: t }) {
           var includePath = path.node.arguments[0].value
           // So that it isn't being added to an undefined var
           var namespaces = includePath.split('.')
-          //log('test')
-          //log(namespaces)
-          //log(namespaces)
           for (var i = 1; i < namespaces.length -1; i++){
-
             var thisNamespaces =  namespaces.slice(0, i + 1)
-            log(thisNamespaces)
             //statements.push(`${nextNameSpace} = ${nextNameSpace} || {};`)
             //log(thisNamespaces)
             var namespacePart = generateMemberExpression(thisNamespaces)
@@ -57,15 +52,14 @@ module.exports = function({ types: t }) {
           //path.insertBefore(t.expressionStatement(t.stringLiteral("Because I'm easy come, easy go.")));
           
           //path.parentPath.replaceWithSourceString(`${declareString}${includePath} = require("${includePath}")`);
-          var localIncludePath = 'localGoog' + includePath.slice('goog'.length)
-          path.parentPath.replaceWithSourceString(`${localIncludePath} = require("${includePath}").${includePath.slice('goog.'.length)}`);
+          path.parentPath.replaceWithSourceString(`${includePath} = require("${includePath}").${includePath.slice('goog.'.length)}`);
           //path.insertBefore(t.variableDeclaration("var", [
           //  t.variableDeclarator("test", path.node) 
           //]))
         } else if (t.isMemberExpression(callee) && isGoogProvideCall(callee)) {
           var includePath = path.node.arguments[0].value
           var namespaces = includePath.split('.')
-          //log(namespaces)
+          
           path.insertBefore([
             t.expressionStatement(
               t.assignmentExpression(
@@ -78,11 +72,11 @@ module.exports = function({ types: t }) {
                 ),
                 //t.stringLiteral('test')
                 //t.objectExpression([])
-                t.identifier('localGoog')
+                t.identifier('goog')
               )
             ) 
           ]);
-          namespaces[0] = 'localGoog'
+
           for (var i = 1; i < namespaces.length; i++){
             var thisNamespaces =  namespaces.slice(0, i + 1)
             //statements.push(`${nextNameSpace} = ${nextNameSpace} || {};`)
@@ -178,6 +172,7 @@ module.exports = function({ types: t }) {
               && d.init.arguments[0].value.startsWith('goog.')){
 
               var includePath = d.init.arguments[0].value.slice('goog.'.length)
+              
               d.init = t.memberExpression(
                 d.init,
                 t.identifier(includePath),
@@ -216,21 +211,37 @@ module.exports = function({ types: t }) {
          */
         exit: function(path, state) {
           
+          //var goog = Object.assign({}, require('goog'))
+
           var contents = path.node.body;
           contents.splice(0, 0, 
             t.variableDeclaration('var', [
               t.variableDeclarator(
                 t.identifier('goog'),
+                
                 t.callExpression(
-                  t.identifier('require'), 
-                  [ 
-                    t.stringLiteral('goog')
+                  t.memberExpression(
+                    t.identifier('Object'),
+                    t.identifier('assign'),
+                    false
+                  ),
+                  [
+                    t.objectExpression([]),
+                    t.callExpression(
+                      t.identifier('require'), 
+                      [ 
+                        t.stringLiteral('goog')
+                      ]
+                    )
                   ]
                 )
-              ),
-              t.variableDeclarator(
-                t.identifier('localGoog'),
-                t.objectExpression([])
+                
+                
+
+
+
+
+
               )
             ])
           ); 
