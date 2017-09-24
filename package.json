@@ -26,8 +26,8 @@
     "webpack-closure-compiler": "^2.1.5"
   },
   "scripts": {
-    "start": "node --stack-size=99999 start.js",
-    "build": "java -jar ./tools/closure-compiler/v20170521.jar --language_in=ECMASCRIPT6 --js_output_file=build/bundle.js --dependency_mode=STRICT --compilation_level=ADVANCED --entry_point=src/index.js --js src/**.js",
+    "start": "java -jar ./tools/closure-compiler/v20170521.jar --language_in=ECMASCRIPT6 --js_output_file=build/bundle.js --dependency_mode=STRICT --entry_point=src/index.js --js src/**.js --js src/**/**.js --js src/goog/**/**.js --js src/goog/**/**/**.js",
+    "build": "java -jar ./tools/closure-compiler/v20170521.jar --language_in=ECMASCRIPT6 --js_output_file=build/bundle.js --dependency_mode=STRICT --compilation_level=ADVANCED --entry_point=src/index.js --js src/**.js --js src/**/**.js --js src/goog/**/**.js --js src/goog/**/**/**.js",
     "generate:aliases": "node tools/generateGoogWebpackAliases/testRun.js src",
     "testTools": "mocha tools/**/*_test.js --recursive --compilers js:babel-register,jsx:babel-register"
   },
