@@ -1,3 +1,5 @@
+# ⚠️ Archived
+This repo is not maintained, I would encourage not using it.
 
 This proof of concept demonstrates using Google's closure library in the CommonJS
 ecosystem. It uses a custom babel plugin so that instead of having to do
